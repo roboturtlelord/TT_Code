@@ -45,7 +45,8 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -74,19 +75,36 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
-
 	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+	//Debugging Inputs
+		pros::lcd::print(0, "Right: %d", trayPot.get_value());
+		pros::lcd::print(1, "Left: %d", liftPot.get_value());
 
-		left_mtr = left;
-		right_mtr = right;
+	//Chassis Control
+		chassisModel->arcade(master.get_analog(ANALOG_LEFT_Y),	master.get_analog(ANALOG_LEFT_X), baseThreshold);
+
+	//Lift Control
+		if(master.get_digital(DIGITAL_L1)) liftVoltage = 10000;
+		else if(master.get_digital(DIGITAL_L2)) liftVoltage = -10000;
+		else if(master.get_digital(DIGITAL_UP)) liftVoltage = 2000;
+		else if(master.get_digital(DIGITAL_RIGHT)) liftVoltage = -2000;
+		else liftVoltage = 0;
+		lift.move_voltage(liftVoltage);
+
+	//Intake Controller
+		if(master.get_digital(DIGITAL_L1)) intakeVoltage = 12000;
+		else if(master.get_digital(DIGITAL_L2)) intakeVoltage = -10000;
+		else if(master.get_digital(DIGITAL_X)) intakeVoltage = 2000;
+		else if(master.get_digital(DIGITAL_A)) intakeVoltage = -2000;
+		else intakeVoltage = 0;
+		intakeRight.move_voltage(intakeVoltage);
+		intakeLeft.move_voltage(intakeVoltage);
+
+	//Tilter Controller
+		tiltVoltage = master.get_analog(ANALOG_RIGHT_Y);
+		if(abs(tiltVoltage) < tiltThreshold) tiltVoltage = 0;
+		tilt.move_voltage(tiltVoltage*120);
+
 		pros::delay(20);
 	}
 }

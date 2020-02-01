@@ -34,12 +34,16 @@
  */
 #define PROS_USE_LITERALS
 
-#include "api.h"
 
+#include "api.h"
+#include "okapi/api.hpp"
+using namespace okapi;
+#include "systems.h"
+#include "globals.h"
 /**
  * You should add more #includes here
  */
-//#include "okapi/api.hpp"
+
 //#include "pros/api_legacy.h"
 
 /**
@@ -52,7 +56,6 @@
  */
 // using namespace pros;
 // using namespace pros::literals;
-// using namespace okapi;
 
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
