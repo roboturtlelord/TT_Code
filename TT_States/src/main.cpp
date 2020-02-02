@@ -26,10 +26,11 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
-	std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
-	  .withMotors(left, right)
-	  .build();
+	// pros::lcd::register_btn1_cb(on_center_button);
+	// std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
+	//   .withMotors(left, right)
+	//   .build();
+	// std::shared_ptr<ChassisModel>  chassisModel = std::dynamic_pointer_cast<SkidSteerModel>(chassis->getModel());
 }
 
 /**
@@ -84,6 +85,11 @@ void opcontrol() {
 		pros::lcd::print(1, "Left: %d", liftPot.get_value());
 
 	//Chassis Control
+		pros::lcd::register_btn1_cb(on_center_button);
+		std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
+			.withMotors(left, right)
+			.build();
+		std::shared_ptr<ChassisModel>  chassisModel = std::dynamic_pointer_cast<SkidSteerModel>(chassis->getModel());
 		chassisModel->arcade(master.get_analog(ANALOG_LEFT_Y),	master.get_analog(ANALOG_LEFT_X),3);
 
 	//Lift Control

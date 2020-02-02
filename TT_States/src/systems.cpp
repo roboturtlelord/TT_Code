@@ -12,11 +12,11 @@ pros::ADIEncoder leftEncoder(3,4);
 pros::ADIEncoder rightEncoder(5,6);
 pros::ADIEncoder backEncoder(7,8);
 
-std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
-  .withMotors(left, right)
-  .build();
-
-std::shared_ptr<ChassisModel>  chassisModel = std::dynamic_pointer_cast<SkidSteerModel>(chassis->getModel());
+// std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
+//   .withMotors(left, right)
+//   .build();
+//
+// std::shared_ptr<ChassisModel>  chassisModel = std::dynamic_pointer_cast<SkidSteerModel>(chassis->getModel());
 
 //LIFT SYSTEM
 pros::Motor lift (lift_Port, MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES);

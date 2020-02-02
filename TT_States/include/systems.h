@@ -14,8 +14,8 @@ extern pros::Motor backLeft;
 extern MotorGroup left;
 extern MotorGroup right;
 
-extern std::shared_ptr<ChassisController> chassis;
-extern std::shared_ptr<ChassisModel> chassisModel;
+// extern std::shared_ptr<ChassisController> chassis;
+// extern std::shared_ptr<ChassisModel> chassisModel;
 
 extern pros::ADIEncoder leftEncoder;
 extern pros::ADIEncoder rightEncoder;
