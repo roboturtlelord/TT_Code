@@ -2,8 +2,8 @@
 //CHASSIS SYSTEM
 pros::Motor frontLeft (frontLeft_Port, MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::Motor frontRight (frontRight_Port, MOTOR_GEARSET_18,false, pros::E_MOTOR_ENCODER_DEGREES);
-pros::Motor backRight (backRight_Port, MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
-pros::Motor backLeft (backLeft_Port, MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor backRight (backRight_Port, MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor backLeft (backLeft_Port, MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES);
 
 MotorGroup left = MotorGroup({frontLeft_Port, backLeft_Port});
 MotorGroup right = MotorGroup({frontRight_Port, backRight_Port});
